@@ -3,23 +3,22 @@ import { Link } from 'umi';
 
 const { Header, Content, Footer } = Layout;
 
-
 const BasicLayout = ({ children }) => (
-
-
   <Layout className="layout">
     <Header>
       <div className="logo" />
       <Menu theme="dark" mode="horizontal">
         <Menu.Item key="1">
-          <Link to='/recipe-list'>Recipe List</Link>
+          <Link to="/recipe-list">Recipe List</Link>
         </Menu.Item>
         <Menu.Item key="2">
-          <Link to='/meal-planner'>Meal Planner</Link>
+          <Link to="/meal-planner">Meal Planner</Link>
         </Menu.Item>
-        <Menu.Item key="3">Search Recipe</Menu.Item>
+        <Menu.Item key="3">
+          <Link to="/search-recipe">Search Recipe</Link>
+        </Menu.Item>
         <Menu.Item key="4">
-          <Link to='/shopping-list'>Shopping List</Link>
+          <Link to="/shopping-list">Shopping List</Link>
         </Menu.Item>
       </Menu>
     </Header>
