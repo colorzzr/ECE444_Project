@@ -19,6 +19,9 @@ const SearchOptions = () => (
   <Tabs defaultActiveKey="1" onChange={changeSearchOption}>
     <TabPane tab="Search Recipe by Ingredients" key="1">
       <PageHeader title="Find a Recipe"></PageHeader>
+      <Button type="primary" icon={<SearchOutlined />}>
+        Search
+      </Button>
       <IngredientTag />
     </TabPane>
     <TabPane tab="Search Recipe by Name" key="2">

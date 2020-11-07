@@ -71,9 +71,6 @@ class IngredientTag extends Component {
     const { tags, inputVisible, inputValue, editInputIndex, editInputValue } = this.state;
     return (
       <>
-        <Button type="primary" icon={<SearchOutlined />}>
-          Search
-        </Button>
         <br /> <br />
         <Input
           placeholder="Enter an Ingredient"
