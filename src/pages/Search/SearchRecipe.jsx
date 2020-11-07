@@ -42,6 +42,7 @@ const SearchOptions = () => (
   </Tabs>
 );
 
+// https://quaranteam-group3.atlassian.net/browse/CCP-60 and https://quaranteam-group3.atlassian.net/browse/CCP-63
 class SearchRecipe extends Component {
   constructor(props) {
     super(props);

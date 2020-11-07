@@ -39,6 +39,11 @@ export default defineConfig({
           component: './Search/SearchRecipe.jsx'
         },
         {
+          path: '/search-results',
+          name: 'default',
+          component: './Search/SearchResults.jsx'
+        },
+        {
           path: '/',
           //redirect: '/dashboard/analysis',
           name: 'default',
