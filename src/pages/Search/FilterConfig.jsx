@@ -1,25 +1,25 @@
 import React, { PureComponent } from 'react';
-import { Form, Button, Select, DatePicker, Switch, Checkbox, Row, Col, Modal } from 'antd';
+import {
+  Form,
+  Button,
+  Select,
+  DatePicker,
+  Input,
+  Checkbox,
+  Row,
+  Col,
+  Modal,
+  Typography,
+} from 'antd';
 import { recipes } from '../../../recipes/recipes.js';
 import axios from 'axios';
 
+const { Title } = Typography;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 import IngredientTag from './IngredientTag';
 import defaultSettings from '../../../config/defaultSettings';
 const { api_endpoint } = defaultSettings;
-
-// {
-//   /* Setup for recipe select list */
-// }
-// const recipeList = [];
-// for (let i = 0; i < Object.keys(recipes).length; i++) {
-//   recipeList.push(
-//     <Option key={i} value={i}>
-//       {recipes[i].title}
-//     </Option>,
-//   );
-// }
 
 {
   /* Formatting */
@@ -39,14 +39,11 @@ const tailLayout = {
   },
 };
 
-const rangeConfig = {
-  rules: [
-    {
-      type: 'array',
-      required: true,
-      message: 'Please select time',
-    },
-  ],
+const validateMessages = {
+  required: '${label} is required!',
+  number: {
+    range: '${label} must be greater than ${min}',
+  },
 };
 
 // https://quaranteam-group3.atlassian.net/browse/CCP-36
@@ -164,8 +161,23 @@ class FilterConfig extends PureComponent {
             preserve={false}
           >
             {/* Ingredient Exclude input tags */}
-            <Form.Item {...tailLayout}>
+            <Form.Item>
+              <Title level={5}>Enter ingredients to exclude from search results: </Title>
               <IngredientTag /> {/*Need to somehow pass ingredient tag values*/}
+            </Form.Item>
+
+            {/* Calorie per serving limit */}
+            <Form.Item
+              name={['caloriePerServing']}
+              label="Calorie limit per serving"
+              rules={[
+                {
+                  type: 'number',
+                  min: 0,
+                },
+              ]}
+            >
+              <Input />
             </Form.Item>
 
             {/* Save button */}

@@ -4,6 +4,7 @@ import { Tag, Input, Tooltip, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 const onSearch = (value) => console.log(value);
+const { Search } = Input;
 
 class IngredientTag extends Component {
   state = {
@@ -71,13 +72,11 @@ class IngredientTag extends Component {
     const { tags, inputVisible, inputValue, editInputIndex, editInputValue } = this.state;
     return (
       <>
-        <br /> <br />
-        <Input
+        <Search
           placeholder="Enter an Ingredient"
           allowClear
-          enterButton="Add"
           size="large"
-          onSearch={onSearch}
+          onSearch={this.handleInputConfirm}
           style={{ width: '100%' }}
           ref={this.saveInputRef}
           type="text"
@@ -86,7 +85,8 @@ class IngredientTag extends Component {
           onChange={this.handleInputChange}
           onBlur={this.handleInputConfirm}
           onPressEnter={this.handleInputConfirm}
-        ></Input>
+          enterButton="Add"
+        ></Search>
         <br />
         <br />
         {tags.map((tag, index) => {

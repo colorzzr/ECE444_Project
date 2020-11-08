@@ -23,6 +23,7 @@ const SearchOptions = () => (
         <Button type="primary" icon={<SearchOutlined />}>
           Search
         </Button>
+        <br /> <br />
         <IngredientTag />
         {/*Need to somehow pass ingredient tag values*/}
       </Card>
