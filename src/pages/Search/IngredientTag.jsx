@@ -78,7 +78,7 @@ class IngredientTag extends Component {
           enterButton="Add"
           size="large"
           onSearch={onSearch}
-          style={{ width: '25%' }}
+          style={{ width: '100%' }}
           ref={this.saveInputRef}
           type="text"
           className="tag-input"

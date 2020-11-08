@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabs, PageHeader, Button, Input } from 'antd';
+import { Tabs, PageHeader, Button, Input, Card } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import axios from 'axios';
 const { TabPane } = Tabs;
@@ -18,29 +18,36 @@ const onSearch = (value) => console.log(value);
 const SearchOptions = () => (
   <Tabs defaultActiveKey="1" onChange={changeSearchOption}>
     <TabPane tab="Search Recipe by Ingredients" key="1">
-      <PageHeader title="Find a Recipe"></PageHeader>
-      <Button type="primary" icon={<SearchOutlined />}>
-        Search
-      </Button>
-      <IngredientTag />
+      <Card style={{ width: '40%' }}>
+        <PageHeader title="Find a Recipe"></PageHeader>
+        <Button type="primary" icon={<SearchOutlined />}>
+          Search
+        </Button>
+        <IngredientTag />
+        {/*Need to somehow pass ingredient tag values*/}
+      </Card>
     </TabPane>
     <TabPane tab="Search Recipe by Name" key="2">
-      <PageHeader title="Find a Recipe"></PageHeader>
-      <Search
-        placeholder="Enter name or keyword"
-        onSearch={onSearch}
-        enterButton
-        style={{ width: '25%', lineHeight: '32px', fontSize: '20px' }}
-      />
+      <Card style={{ width: '40%' }}>
+        <PageHeader title="Find a Recipe"></PageHeader>
+        <Search
+          placeholder="Enter name or keyword"
+          onSearch={onSearch}
+          enterButton
+          style={{ width: '100%', lineHeight: '32px', fontSize: '20px' }}
+        />
+      </Card>
     </TabPane>
     <TabPane tab="Search Recipe by Pantry Items" key="3">
-      <PageHeader
-        title="Find a Recipe"
-        subTitle={<span>Search for recipes based on items available in the virtual pantry</span>}
-      ></PageHeader>
-      <Button type="primary" icon={<SearchOutlined />}>
-        Search
-      </Button>
+      <Card style={{ width: '40%' }}>
+        <PageHeader
+          title="Find a Recipe"
+          subTitle={<span>Search for recipes based on items available in the virtual pantry</span>}
+        ></PageHeader>
+        <Button type="primary" icon={<SearchOutlined />}>
+          Search
+        </Button>
+      </Card>
     </TabPane>
   </Tabs>
 );

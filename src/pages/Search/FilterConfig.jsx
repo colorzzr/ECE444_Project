@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-
+import IngredientTag from './IngredientTag';
 import defaultSettings from '../../../config/defaultSettings';
 const { api_endpoint } = defaultSettings;
 
@@ -163,6 +163,11 @@ class FilterConfig extends PureComponent {
             onFinish={this.onFinish}
             preserve={false}
           >
+            {/* Ingredient Exclude input tags */}
+            <Form.Item {...tailLayout}>
+              <IngredientTag /> {/*Need to somehow pass ingredient tag values*/}
+            </Form.Item>
+
             {/* Save button */}
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit">
