@@ -29,6 +29,7 @@ class Header_bar extends PureComponent {
     ];
     if (username != null) {
       headers.push(
+<<<<<<< HEAD
         <Menu.Item key="3">
           <Link to="/meal-planner">Meal Planner</Link>
         </Menu.Item>,
@@ -39,6 +40,16 @@ class Header_bar extends PureComponent {
           <Link to="/shopping-list">Shopping List</Link>
         </Menu.Item>,
       );
+=======
+        <Menu.Item key="4">
+          <Link to='/meal-planner'>Meal Planner</Link>
+        </Menu.Item>)
+
+      headers.push(
+        <Menu.Item key="5">
+          <Link to='/shopping-list'>Shopping List</Link>
+        </Menu.Item>)
+>>>>>>> master
     }
 
     return (
