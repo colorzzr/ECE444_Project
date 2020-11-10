@@ -49,13 +49,33 @@ const recipeSummary = (rating, difficulty, prepTime) => {
 
 // https://quaranteam-group3.atlassian.net/browse/CCP-74
 class SearchResults extends Component {
-  state = {
-    hasErrors: false,
-    isFetching: true,
-    recipeList: [],
-    fastReadingMode: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      hasErrors: false,
+      isFetching: true,
+      recipeList: [],
+      fastReadingMode: false,
+      ingredientsTagsList: [],
+      calorieLimit: -1,
+      timeLimit: -1,
+    };
 
+    this.updateFilter = this.updateFilter.bind(this);
+  }
+  updateFilter(tagsInput, calorieLimitInput, timeLimitInput) {
+    this.setState({
+      ingredientsTagsList: tagsInput,
+      calorieLimit: calorieLimitInput,
+      timeLimit: timeLimitInput,
+    });
+
+    console.log(tagsInput);
+    console.log(calorieLimitInput);
+    console.log(timeLimitInput);
+
+    //BACKEND API HERE
+  }
   componentDidMount() {
     this.setState({ isFetching: true });
     axios.get(api_endpoint + '/v1/recipes/', {}).then((response) => {
@@ -172,7 +192,7 @@ class SearchResults extends Component {
       }
       return (
         <Card>
-          <FilterConfig />
+          <FilterConfig newFilter={this.updateFilter} />
           <PageHeader title="Search Results"></PageHeader>
           {recipeResultsList}
         </Card>

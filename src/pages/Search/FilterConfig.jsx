@@ -71,7 +71,7 @@ class FilterConfig extends PureComponent {
   constructor(props) {
     super(props);
 
-    const { newItemFunc } = this.props;
+    const { newFilter } = this.props;
 
     this.onFinish = this.onFinish.bind(this);
     this.closeForm = this.closeForm.bind(this);
@@ -99,20 +99,21 @@ class FilterConfig extends PureComponent {
 
   onFinish(values) {
     console.log('Success:', values);
-    const { recipes } = this.state;
 
-    // update the name of attribute later
-    var recipe_id = values['recipe'];
-    var rp = recipes[recipe_id];
-    console.log(rp);
+    //get calorie limit and time limit from form
+    var calorieLimit = values['calorieLimit'];
+    var timeLimit = values['timeLimit'];
+    console.log(calorieLimit);
+    console.log(timeLimit);
+    console.log(this.state.ingredientsTagsList);
 
     //close the modal
     this.setState({
       visible: false,
     });
 
-    const { newItemFunc } = this.props;
-    newItemFunc(tags, meal, days);
+    const { newFilter } = this.props;
+    newFilter(this.state.ingredientsTagsList, calorieLimit, timeLimit);
   }
 
   updateTags(inputTags) {
