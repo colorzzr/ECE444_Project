@@ -137,8 +137,6 @@ class IngredientTag extends Component {
             tagElem
           );
         })}
-        <br />
-        <br />
       </>
     );
   }

@@ -10,6 +10,7 @@ import {
   Col,
   Modal,
   Typography,
+  InputNumber,
 } from 'antd';
 import { recipes } from '../../../recipes/recipes.js';
 import axios from 'axios';
@@ -40,13 +41,12 @@ const tailLayout = {
 };
 
 const validateMessages = {
-  required: '${label} is required!',
+  required: 'Input is required!',
   types: {
-    email: '${label} is not validate email!',
-    number: '${label} is not a validate number!',
+    number: 'Input is not a validate number!',
   },
   number: {
-    range: '${label} must be greater than ${min}',
+    range: 'Input must be greater than ${min}',
   },
 };
 
@@ -81,24 +81,6 @@ class FilterConfig extends PureComponent {
       visible: false,
       recipes: [],
     };
-  }
-
-  // after the component is rendered
-  componentDidMount() {
-    axios
-      .get(api_endpoint + 'v1/recipes/', {
-        'Access-Control-Allow-Origin': '*',
-        withCredentials: true,
-      })
-      .then((response) => {
-        // console.log(response['data']['result'])
-        this.setState({
-          recipes: response['data']['result'],
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   onChange(value) {
@@ -159,7 +141,7 @@ class FilterConfig extends PureComponent {
             {...layout}
             name="basic"
             initialValues={{
-              remember: true,
+              remember: false,
             }}
             onFinish={this.onFinish}
             preserve={false}
@@ -171,17 +153,19 @@ class FilterConfig extends PureComponent {
             </Form.Item>
 
             {/* Calorie per serving limit */}
-            <Form.Item
-              name={['caloriePerServing']}
-              label="Calorie limit per serving"
-              rules={[
-                {
-                  type: 'number',
-                  min: 0,
-                },
-              ]}
-            >
-              <Input />
+            <Title level={5}>Enter a Calorie limit per serving: </Title>
+            <Form.Item>
+              <Form.Item name="calorieLimit" noStyle>
+                <InputNumber min={0} />
+              </Form.Item>
+            </Form.Item>
+
+            {/* Time limit */}
+            <Title level={5}>Enter a Meal Preparation Time Limit(mins): </Title>
+            <Form.Item>
+              <Form.Item name="timeLimit" noStyle>
+                <InputNumber min={0} />
+              </Form.Item>
             </Form.Item>
 
             {/* Save button */}
