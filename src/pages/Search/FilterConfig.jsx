@@ -41,6 +41,10 @@ const tailLayout = {
 
 const validateMessages = {
   required: '${label} is required!',
+  types: {
+    email: '${label} is not validate email!',
+    number: '${label} is not a validate number!',
+  },
   number: {
     range: '${label} must be greater than ${min}',
   },
@@ -162,7 +166,7 @@ class FilterConfig extends PureComponent {
           >
             {/* Ingredient Exclude input tags */}
             <Form.Item>
-              <Title level={5}>Enter ingredients to exclude from search results: </Title>
+              <Title level={5}>Enter ingredients to EXCLUDE from search results: </Title>
               <IngredientTag /> {/*Need to somehow pass ingredient tag values*/}
             </Form.Item>
 
@@ -183,7 +187,7 @@ class FilterConfig extends PureComponent {
             {/* Save button */}
             <Form.Item {...tailLayout}>
               <Button type="primary" htmlType="submit">
-                Save
+                Go
               </Button>
             </Form.Item>
           </Form>

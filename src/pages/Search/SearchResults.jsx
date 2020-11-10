@@ -22,8 +22,12 @@ class SearchResults extends Component {
   componentDidMount() {
     this.setState({ isFetching: true });
     axios.get(api_endpoint + '/v1/recipes/', {}).then((response) => {
-      console.log(response);
+      // console.log(response);
       this.setState({ recipeList: response['data']['result'], isFetching: false });
+    });
+
+    axios.get(api_endpoint + '/v1/recipes/count', {}).then((response) => {
+      this.setState({ totalPage: response['data']['result'], isFetching: false });
     });
   }
 
@@ -40,21 +44,20 @@ class SearchResults extends Component {
       for (let i = 0; i < this.state.recipeList.length; i++) {
         console.log(this.state.recipeList[i].title);
         const recipeDetail = this.state.recipeList[i];
+        var img_url = this.state.recipeList[i].image;
+        const isLongTag = this.state.recipeList[i].title.length > 35;
+        if (img_url == null) {
+          img_url =
+            'https://ww4.publix.com/-/media/aprons/default/no-image-recipe_600x440.jpg?as=1&w=417&h=306&hash=CA8F7C3BF0B0E87C217D95BF8798D74FA193959C';
+        }
         buttonList.push(
           <div className="site-card-wrapper">
             <Row gutter={16}>
               <Col span={8}>
                 <Card
                   hoverable
-                  style={{ width: 300 }}
-                  cover={
-                    <img
-                      alt="example"
-                      width={300}
-                      //height={300}
-                      src="https://ww4.publix.com/-/media/aprons/images/2017/01/r0000816_600x440.jpg"
-                    />
-                  }
+                  style={{ width: 400 }}
+                  cover={<img width={272} alt="recipe_image" src={img_url} />}
                 >
                   <Button
                     key={recipeDetail.id}
@@ -62,7 +65,9 @@ class SearchResults extends Component {
                     block
                     href={'/recipe/' + recipeDetail.id}
                   >
-                    {recipeDetail.title}
+                    {isLongTag
+                      ? `${this.state.recipeList[i].title.slice(0, 35)}...`
+                      : this.state.recipeList[i].title}
                   </Button>
                 </Card>
               </Col>
