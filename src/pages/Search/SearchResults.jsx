@@ -1,14 +1,50 @@
 import React, { Component } from 'react';
-import { Tabs, PageHeader, Button, Input, Card, Spin, Col, Row } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Tabs, PageHeader, Button, Input, Card, Spin, Col, Row, Rate } from 'antd';
+import { SearchOutlined, RocketOutlined, FieldTimeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 const { TabPane } = Tabs;
 const { Search } = Input;
 
+import styles from '../../layouts/RecipeLayout.less';
 import FilterConfig from './FilterConfig.jsx';
 
 import defaultSettings from '../../../config/defaultSettings';
 const { api_endpoint } = defaultSettings;
+
+const recipeSummary = (rating, difficulty, prepTime) => {
+  return (
+    <Col className={styles.rowContent} align="bottom">
+      {/* Col1: Rating */}
+      <Row span={6}>
+        <span>
+          <Rate disabled defaultValue={rating} allowHalf={true} />
+          <span className={styles.labelText}>{'Rating: ' + rating + '/5'}</span>
+        </span>
+      </Row>
+
+      {/* Col2: difficulty */}
+      <Row span={6}>
+        <span>
+          <Rate
+            character={<RocketOutlined />}
+            disabled
+            defaultValue={difficulty}
+            allowHalf={true}
+          />
+          <span className={styles.labelText}>{'Difficulty: ' + difficulty + '/5'}</span>
+        </span>
+      </Row>
+
+      {/* Col3: Prep time */}
+      <Row span={12}>
+        <span className={styles.labelText}>
+          <FieldTimeOutlined />
+          <span className={styles.labelText}>{'Prep Time: ' + prepTime}</span>
+        </span>
+      </Row>
+    </Col>
+  );
+};
 
 // https://quaranteam-group3.atlassian.net/browse/CCP-74
 class SearchResults extends Component {
@@ -42,7 +78,7 @@ class SearchResults extends Component {
     } else {
       var buttonList = [];
       for (let i = 0; i < this.state.recipeList.length; i++) {
-        console.log(this.state.recipeList[i].title);
+        console.log(this.state.recipeList[i]);
         const recipeDetail = this.state.recipeList[i];
         var img_url = this.state.recipeList[i].image;
         const isLongTag = this.state.recipeList[i].title.length > 35;
@@ -69,6 +105,8 @@ class SearchResults extends Component {
                       ? `${this.state.recipeList[i].title.slice(0, 35)}...`
                       : this.state.recipeList[i].title}
                   </Button>
+                  {/* NEED TO USE REAL DATA */}
+                  {recipeSummary(3.5, 3, '20 Minutes')}
                 </Card>
               </Col>
             </Row>
