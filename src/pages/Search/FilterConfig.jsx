@@ -75,11 +75,14 @@ class FilterConfig extends PureComponent {
 
     this.onFinish = this.onFinish.bind(this);
     this.closeForm = this.closeForm.bind(this);
+    this.updateTags = this.updateTags.bind(this);
 
     // console.log(newItemFunc)
     this.state = {
       visible: false,
-      recipes: [],
+      ingredientsTagsList: [],
+      calorieLimit: -1,
+      timeLimit: -1,
     };
   }
 
@@ -109,21 +112,19 @@ class FilterConfig extends PureComponent {
     });
 
     const { newItemFunc } = this.props;
-    newItemFunc(rp, meal, days);
+    newItemFunc(tags, meal, days);
+  }
+
+  updateTags(inputTags) {
+    console.log(inputTags);
+    let { ingredientsTagsList } = this.state;
+    ingredientsTagsList = inputTags;
+    this.setState({
+      ingredientsTagsList,
+    });
   }
 
   render() {
-    // start to prepare the drop down
-    const { recipes } = this.state;
-    var recipeList = [];
-    for (let i = 0; i < recipes.length; i++) {
-      recipeList.push(
-        <Option key={i} value={i}>
-          {recipes[i].title}
-        </Option>,
-      );
-    }
-
     return (
       /* Modal view */
       <>
@@ -149,7 +150,8 @@ class FilterConfig extends PureComponent {
             {/* Ingredient Exclude input tags */}
             <Form.Item>
               <Title level={5}>Enter ingredients to EXCLUDE from search results: </Title>
-              <IngredientTag /> {/*Need to somehow pass ingredient tag values*/}
+              <IngredientTag updateIngredientsTagsList={this.updateTags} />{' '}
+              {/*Need to somehow pass ingredient tag values*/}
             </Form.Item>
 
             {/* Calorie per serving limit */}

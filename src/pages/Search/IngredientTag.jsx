@@ -7,13 +7,19 @@ const onSearch = (value) => console.log(value);
 const { Search } = Input;
 
 class IngredientTag extends Component {
-  state = {
-    tags: [],
-    inputVisible: true,
-    inputValue: '',
-    editInputIndex: '',
-    editInputValue: '',
-  };
+  constructor(props) {
+    super(props);
+
+    const { updateIngredientsTagsList } = this.props;
+
+    this.state = {
+      tags: [],
+      inputVisible: true,
+      inputValue: '',
+      editInputIndex: '',
+      editInputValue: '',
+    };
+  }
 
   handleClose = (removedTag) => {
     const tags = this.state.tags.filter((tag) => tag !== removedTag);
@@ -36,6 +42,10 @@ class IngredientTag extends Component {
       tags = [...tags, inputValue];
     }
     console.log(tags);
+
+    const { updateIngredientsTagsList } = this.props;
+    updateIngredientsTagsList(tags);
+
     this.setState({
       tags,
       inputVisible: true,
